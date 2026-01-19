@@ -1,0 +1,62 @@
+# my_Wake Configuration
+
+# Wake words to detect
+wake_words:
+  - "hi iroi"
+  - "hey iroi"
+  - "hello iroi"
+
+# Audio settings
+audio:
+  sample_rate: 16000
+  window_duration: 2.0  # seconds
+  hop_duration: 0.1     # seconds
+
+# Model settings
+model:
+  type: "standard"  # "standard" or "small"
+  n_mels: 40
+  hidden_size: 64
+
+# Training settings
+training:
+  batch_size: 32
+  learning_rate: 0.001
+  epochs: 50
+  val_split: 0.2
+  early_stopping_patience: 10
+
+# Inference settings
+inference:
+  threshold: 0.5
+  smoothing_window: 3
+  max_recording_duration: 10.0
+  silence_threshold: 0.01
+  silence_duration: 1.0
+
+# ASR settings
+asr:
+  model: "whisper-1"
+  language: null  # null for auto-detect
+
+# Data generation settings
+data_generation:
+  voices:
+    - "en-US-AriaNeural"
+    - "en-US-GuyNeural"
+    - "en-US-JennyNeural"
+    - "en-GB-SoniaNeural"
+    - "en-AU-NatashaNeural"
+  rate_variations:
+    - "-20%"
+    - "-10%"
+    - "+0%"
+    - "+10%"
+    - "+20%"
+  pitch_variations:
+    - "-10Hz"
+    - "-5Hz"
+    - "+0Hz"
+    - "+5Hz"
+    - "+10Hz"
+  augmentations_per_file: 3
