@@ -191,6 +191,8 @@ def export_to_onnx(
         n_mels: Mel 频带数
         time_steps: 时间步数
     """
+    # 移到 CPU 导出（ONNX 推理通常在 CPU）
+    model = model.cpu()
     model.eval()
 
     # 创建示例输入
