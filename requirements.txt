@@ -28,6 +28,11 @@ openai>=1.0.0
 # VAD (Voice Activity Detection)
 webrtcvad>=2.0.10
 
+# API Server (for cloud deployment)
+fastapi>=0.100.0
+uvicorn>=0.23.0
+python-multipart>=0.0.6
+
 # Utilities
 tqdm>=4.65.0
 pyyaml>=6.0
