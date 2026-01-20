@@ -17,8 +17,9 @@ from scipy import signal
 from tqdm import tqdm
 
 
-# 唤醒词列表
+# 唤醒词列表 - 以 "iroi" 为核心
 WAKE_WORDS = {
+    "iroi": ["iroi", "iroi!", "iroi?", "e roy", "e-roy"],  # 核心唤醒词
     "hi_iroi": ["hi iroi", "hi, iroi", "hi iroi!"],
     "hey_iroi": ["hey iroi", "hey, iroi", "hey iroi!"],
     "hello_iroi": ["hello iroi", "hello, iroi", "hello iroi!"],
@@ -185,30 +186,37 @@ class TTSGenerator:
 class NegativeSampleGenerator:
     """生成负样本（非唤醒词的音频）"""
 
-    # 负样本文本 - 相似但不同的短语
+    # 负样本文本 - 不应该触发唤醒词
     NEGATIVE_TEXTS = [
-        # 相似的问候语
+        # 单独的问候语（重要：这些不应该触发）
+        "hi",
+        "hey",
+        "hello",
         "hi there",
         "hey there",
         "hello there",
         "hi everyone",
         "hey you",
         "hello world",
-        # 相似发音
+        # 相似发音但不是 iroi
         "hi Roy",
         "hey Roy",
         "hello Roy",
-        "hi Elroy",
+        "Roy",
         "hi Troy",
+        "Troy",
+        "Elroy",
+        "hi Elroy",
         # 常见短语
-        "hi",
-        "hey",
-        "hello",
         "good morning",
         "good evening",
         "how are you",
         "what's up",
         "excuse me",
+        "ok",
+        "okay",
+        "yes",
+        "no",
         # 其他随机短语
         "the weather is nice",
         "can you help me",
@@ -218,6 +226,8 @@ class NegativeSampleGenerator:
         "no thanks",
         "maybe later",
         "see you soon",
+        "thank you",
+        "sorry",
     ]
 
     def __init__(self, output_dir: str, sample_rate: int = 16000):
